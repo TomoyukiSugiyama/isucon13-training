@@ -46,6 +46,12 @@ pt-query-digest mysql-slow.log
 # nginx の ログ解析
 ## alp のインストール
 
+```
+wget https://github.com/tkuchiki/alp/releases/download/v1.0.21/alp_linux_amd64.zip
+apt install unzip
+unzip alp_linux_amd64.zip
+```
+
 ## ログのフォーマットを変更
 
 `/etc/nginx/nginx.conf` にログフォーマットを設定する
