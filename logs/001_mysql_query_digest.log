@@ -1,0 +1,180 @@
+# 770ms user time, 10ms system time, 29.00M rss, 35.09M vsz
+# Current date: Mon Feb 12 11:08:15 2024
+# Hostname: ip-172-31-40-37
+# Files: /var/log/mysql/mysql-slow.log
+# Overall: 8.00k total, 17 unique, 86.96 QPS, 1.88x concurrency __________
+# Time range: 2024-02-12T11:06:10 to 2024-02-12T11:07:42
+# Attribute          total     min     max     avg     95%  stddev  median
+# ============     ======= ======= ======= ======= ======= ======= =======
+# Exec time           173s    54us   294ms    22ms    61ms    28ms     8ms
+# Lock time           89ms       0     7ms    11us     1us   147us     1us
+# Rows sent         49.97k       0   7.32k    6.40    0.99  133.53    0.99
+# Rows examine      12.88M       0  14.01k   1.65k   2.06k   1.01k   1.33k
+# Query size         1.12M      19     233  146.52  158.58   18.51  143.84
+
+# Profile
+# Rank Query ID                       Response time Calls R/Call V/M   Ite
+# ==== ============================== ============= ===== ====== ===== ===
+#    1 0x42EF7D7D98FBCC9723BF896EB... 68.8857 39.9%  2641 0.0261  0.02 SELECT records
+#    2 0xF1B8EF06D6CA63B24BFF433E0... 43.1969 25.0%  2777 0.0156  0.04 SELECT users livestreams livecomments
+#    3 0x3D83BC87F3B3A00D571FFC810... 40.5032 23.5%  2123 0.0191  0.02 SELECT records
+#    4 0x7F9C0C0BA9473953B723EE16C... 10.2307  5.9%    78 0.1312  0.08 SELECT reservation_slots
+#    5 0x9AC623FA477E73A44D191D296...  5.9086  3.4%   242 0.0244  0.01 SELECT records
+# MISC 0xMISC                          3.9772  2.3%   139 0.0286   0.0 <12 ITEMS>
+
+# Query 1: 28.71 QPS, 0.75x concurrency, ID 0x42EF7D7D98FBCC9723BF896EBFC51D24 at byte 2628646
+# Scores: V/M = 0.02
+# Time range: 2024-02-12T11:06:10 to 2024-02-12T11:07:42
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         33    2641
+# Exec time     39     69s   757us   173ms    26ms    59ms    23ms    26ms
+# Lock time     46    42ms       0     7ms    15us     1us   203us     1us
+# Rows sent      1    1002       0       1    0.38    0.99    0.48       0
+# Rows examine  26   3.38M   1.25k   1.37k   1.31k   1.33k   38.77   1.26k
+# Query size    31 365.25k     131     209  141.62  158.58    9.99  136.99
+# String:
+# Databases    isudns
+# Hosts        localhost
+# Users        isudns
+# Query_time distribution
+#   1us
+#  10us
+# 100us  ####
+#   1ms  ###########################
+#  10ms  ################################################################
+# 100ms  #
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `isudns` LIKE 'records'\G
+#    SHOW CREATE TABLE `isudns`.`records`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT content,ttl,prio,type,domain_id,disabled,name,auth FROM records WHERE disabled=0 and name='lczuqg3hfkuxo0r9qoi0.u.isucon.local' and domain_id=1\G
+
+# Query 2: 52.40 QPS, 0.82x concurrency, ID 0xF1B8EF06D6CA63B24BFF433E06CCEB22 at byte 2002978
+# Scores: V/M = 0.04
+# Time range: 2024-02-12T11:06:21 to 2024-02-12T11:07:14
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         34    2777
+# Exec time     25     43s   200us   176ms    16ms    65ms    25ms     1ms
+# Lock time     12    11ms       0     3ms     4us     1us    64us     1us
+# Rows sent      5   2.71k       1       1       1       1       0       1
+# Rows examine  42   5.43M       0   2.13k   2.00k   2.06k   94.48   1.96k
+# Query size    39 446.94k     163     166  164.81  158.58       0  158.58
+# String:
+# Databases    isupipe
+# Hosts        localhost
+# Users        isucon
+# Query_time distribution
+#   1us
+#  10us
+# 100us  #
+#   1ms  ################################################################
+#  10ms  ######################
+# 100ms  #
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `isupipe` LIKE 'users'\G
+#    SHOW CREATE TABLE `isupipe`.`users`\G
+#    SHOW TABLE STATUS FROM `isupipe` LIKE 'livestreams'\G
+#    SHOW CREATE TABLE `isupipe`.`livestreams`\G
+#    SHOW TABLE STATUS FROM `isupipe` LIKE 'livecomments'\G
+#    SHOW CREATE TABLE `isupipe`.`livecomments`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT IFNULL(SUM(l2.tip), 0) FROM users u
+		INNER JOIN livestreams l ON l.user_id = u.id
+		INNER JOIN livecomments l2 ON l2.livestream_id = l.id
+		WHERE u.id = 209\G
+
+# Query 3: 23.08 QPS, 0.44x concurrency, ID 0x3D83BC87F3B3A00D571FFC8104A6E50C at byte 2358529
+# Scores: V/M = 0.02
+# Time range: 2024-02-12T11:06:10 to 2024-02-12T11:07:42
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         26    2123
+# Exec time     23     41s   713us   168ms    19ms    48ms    19ms    13ms
+# Lock time     33    30ms       0     4ms    14us     1us   140us     1us
+# Rows sent      2   1.09k       0       1    0.53    0.99    0.50    0.99
+# Rows examine  21   2.72M   1.25k   1.37k   1.31k   1.33k   39.53   1.26k
+# Query size    24 280.28k     128     208  135.19  151.03   10.43  124.25
+# String:
+# Databases    isudns
+# Hosts        localhost
+# Users        isudns
+# Query_time distribution
+#   1us
+#  10us
+# 100us  ######
+#   1ms  ################################################
+#  10ms  ################################################################
+# 100ms  #
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `isudns` LIKE 'records'\G
+#    SHOW CREATE TABLE `isudns`.`records`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT content,ttl,prio,type,domain_id,disabled,name,auth FROM records WHERE disabled=0 and type='SOA' and name='hyx8vs3bjp8y8kgwnk4by38pmza0.u.isucon.local'\G
+
+# Query 4: 0.97 QPS, 0.13x concurrency, ID 0x7F9C0C0BA9473953B723EE16C08655F1 at byte 1083343
+# Scores: V/M = 0.08
+# Time range: 2024-02-12T11:06:21 to 2024-02-12T11:07:41
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0      78
+# Exec time      5     10s     5ms   294ms   131ms   266ms   102ms   141ms
+# Lock time      0    77us       0     2us       0     1us       0     1us
+# Rows sent      1     579       1      20    7.42   18.53    5.98    5.75
+# Rows examine   5 667.19k   8.55k   8.55k   8.55k   8.55k       0   8.55k
+# Query size     0   7.31k      96      96      96      96       0      96
+# String:
+# Databases    isupipe
+# Hosts        localhost
+# Users        isucon
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms  ######################################
+#  10ms  ########
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `isupipe` LIKE 'reservation_slots'\G
+#    SHOW CREATE TABLE `isupipe`.`reservation_slots`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM reservation_slots WHERE start_at >= 1700899200 AND end_at <= 1700967600 FOR UPDATE\G
+
+# Query 5: 3.61 QPS, 0.09x concurrency, ID 0x9AC623FA477E73A44D191D296850A025 at byte 1804581
+# Scores: V/M = 0.01
+# Time range: 2024-02-12T11:06:34 to 2024-02-12T11:07:41
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          3     242
+# Exec time      3      6s   763us    72ms    24ms    46ms    16ms    27ms
+# Lock time      3     3ms       0     1ms    13us     1us   106us     1us
+# Rows sent      0     121       0       1    0.50    0.99    0.50    0.99
+# Rows examine   2 316.78k   1.25k   1.37k   1.31k   1.33k   40.10   1.26k
+# Query size     3  36.30k     146     161  153.62  158.58    4.17  151.03
+# String:
+# Databases    isudns
+# Hosts        localhost
+# Users        isudns
+# Query_time distribution
+#   1us
+#  10us
+# 100us  ######
+#   1ms  ################
+#  10ms  ################################################################
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `isudns` LIKE 'records'\G
+#    SHOW CREATE TABLE `isudns`.`records`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT content,ttl,prio,type,domain_id,disabled,name,auth FROM records WHERE disabled=0 and type='A' and name='satomiishii0.u.isucon.local' and domain_id=1\G
