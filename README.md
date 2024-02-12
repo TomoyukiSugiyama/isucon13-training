@@ -9,7 +9,6 @@
 
 ```
 sudo apt update
-sudo apt upgrade
 sudo apt install percona-toolkit
 ```
 
@@ -40,7 +39,7 @@ sudo cp /dev/null /var/log/mysql/mysql-slow.log
 ## ログの解析
 
 ```bash
-pt-query-digest mysql-slow.log
+sudo pt-query-digest /var/log/mysql/mysql-slow.log
 ```
 
 # nginx の ログ解析
@@ -48,8 +47,9 @@ pt-query-digest mysql-slow.log
 
 ```
 wget https://github.com/tkuchiki/alp/releases/download/v1.0.21/alp_linux_amd64.zip
-apt install unzip
+sudo apt install unzip
 unzip alp_linux_amd64.zip
+sudo mv alp /usr/local/bin/
 ```
 
 ## ログのフォーマットを変更
@@ -91,4 +91,12 @@ sudo systemctl restart nginx.service
 
 ```
 sudo cp /dev/null /var/log/nginx/access.log
+```
+
+## ログの分析
+
+`alp_config.yaml` を作成する
+
+```
+sudo alp ltsv --config alp_config.yaml
 ```
