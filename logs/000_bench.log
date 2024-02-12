@@ -1,0 +1,21 @@
+2024-02-12T04:17:26.620Z	info	staff-logger	bench/bench.go:260	ベンチマーク走行時間: 1m0.146538115s
+2024-02-12T04:17:26.621Z	info	isupipe-benchmarker	ベンチマーク走行終了
+2024-02-12T04:17:26.621Z	info	isupipe-benchmarker	最終チェックを実施します
+2024-02-12T04:17:26.621Z	info	isupipe-benchmarker	最終チェックが成功しました
+2024-02-12T04:17:26.621Z	info	isupipe-benchmarker	重複排除したログを以下に出力します
+2024-02-12T04:17:26.621Z	info	staff-logger	bench/bench.go:277	ベンチエラーを収集します
+2024-02-12T04:17:26.622Z	info	staff-logger	bench/bench.go:285	内部エラーを収集します
+2024-02-12T04:17:26.622Z	info	staff-logger	bench/bench.go:301	シナリオカウンタを出力します
+2024-02-12T04:17:26.622Z	info	isupipe-benchmarker	配信を最後まで視聴できた視聴者数	{"viewers": 7}
+2024-02-12T04:17:26.622Z	info	staff-logger	bench/bench.go:323	[シナリオ aggressive-streamer-moderate] 19 回成功
+2024-02-12T04:17:26.622Z	info	staff-logger	bench/bench.go:323	[シナリオ dns-watertorture-attack] 8 回成功
+2024-02-12T04:17:26.623Z	info	staff-logger	bench/bench.go:323	[シナリオ streamer-cold-reserve] 31 回成功
+2024-02-12T04:17:26.623Z	info	staff-logger	bench/bench.go:323	[シナリオ streamer-moderate] 23 回成功
+2024-02-12T04:17:26.623Z	info	staff-logger	bench/bench.go:323	[シナリオ viewer-report] 32 回成功, 1 回失敗
+2024-02-12T04:17:26.623Z	info	staff-logger	bench/bench.go:323	[シナリオ viewer-spam] 20 回成功
+2024-02-12T04:17:26.623Z	info	staff-logger	bench/bench.go:323	[シナリオ viewer] 7 回成功
+2024-02-12T04:17:26.623Z	info	staff-logger	bench/bench.go:323	[失敗シナリオ viewer-report-fail] 1 回失敗
+2024-02-12T04:17:26.624Z	info	staff-logger	bench/bench.go:329	DNSAttacker並列数: 2
+2024-02-12T04:17:26.624Z	info	staff-logger	bench/bench.go:330	名前解決成功数: 1204
+2024-02-12T04:17:26.624Z	info	staff-logger	bench/bench.go:331	名前解決失敗数: 1
+2024-02-12T04:17:26.624Z	info	staff-logger	bench/bench.go:335	スコア: 2191
